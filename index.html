@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HUGO - BOSS</title>
+	<link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/890dafd719.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".hamburger").click(function(){
+			   $(".wrapper").toggleClass("collapse");
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="top_navbar">
+    <div class="hamburger">
+       <div class="one"></div>
+       <div class="two"></div>
+       <div class="three"></div>
+    </div>
+    <div class="top_menu">
+      <div class="logo">BOSS</div>
+      <!-- <ul>
+        <li><a href="#">
+          <i class="fas fa-search"></i></a></li>
+        <li><a href="#">
+          <i class="fas fa-bell"></i>
+          </a></li>
+        <li><a href="#">
+          <i class="fas fa-user"></i>
+          </a></li>
+      </ul> -->
+    </div>
+  </div>
+  
+  <div class="sidebar">
+      <ul>
+        <li><a href="#" id="dash">
+          <span class="icon">
+            <i class="fa-solid fa-list"></i>
+          </span>
+          <span class="title">List-todo</span></a></li>
+        <li><a href="#titlee">
+          <span class="icon">
+            <i class="fa-solid fa-scissors"></i>
+          </span>
+          <span class="title">Altiration</span>
+          </a></li>
+        <li><a href="#">
+          <span class="icon"><i class="fas fa-volleyball-ball"></i></span>
+          <span class="title">Sports</span>
+          </a></li>
+        <!-- <li><a href="#">
+          <span class="icon"><i class="fas fa-blog"></i></span>
+          <span class="title">Blogs</span>
+          </a></li>
+        <li><a href="#">
+          <span class="icon"><i class="fas fa-leaf"></i></span>
+          <span class="title">Nature</span>
+          </a></li> -->
+    </ul>
+  </div>
+  
+  <div class="main_container">
+    <div id="todo-container">
+      <div id="todo-header">
+        <h2>To-Do List</h2>
+      </div>
+      <ul id="todo-list"></ul>
+      <input type="text" id="todo-input" placeholder="Add a new task">
+      <button id="add-button">Add Task</button>
+    </div>
+      
+
+    <br>
+    <br>
+    <hr>
+    <br>
+
+
+    <div class="crud">
+      <div class="head">
+          <h2 id="titlee"></h2>
+          <P>ALTIRATION MANAGEMENT SYSTEM</P>
+      </div>
+      <div class="inputs">
+          <input type="text" name="" id="title" placeholder="Customer Name">
+          <div class="price">
+              <input onkeyup="getTotal()" type="number" id="price" placeholder="Phone Number">
+              <input onkeyup="getTotal()" type="date" id="taxes">
+              <!-- <input onkeyup="getTotal()" type="number" id="ads" placeholder="ads"> -->
+              <input onkeyup="getTotal()" type="date" id="discount" placeholder="discount">
+              <!-- <small id="total"></small> -->
+          </div>
+          <input type="number" id="count" placeholder="Quantity">
+          <input type="text" id="category" placeholder="Alt. Number">
+          <input type="text" id="categoryy" placeholder="Discription">
+          <button id="submit">creat</button>
+      </div>
+      <div class="outputs">
+          <div class="search_block">
+              <input type="text" onkeyup="searchData(this.value)" id="search" placeholder= 'search..'>
+              <div class="btn_search">
+                  <button onclick="getSearchMood(this.id)" id="searchCategory"> Search by Alteration Num</button>
+                  <button onclick="getSearchMood(this.id)" id="searchTitlle"> Search by Name</button>
+              </div>
+          </div>
+          <div id="deleteAll">
+
+          </div>
+          <table>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Sent Date</th>
+                  <!-- <th>ADS</th> -->
+                  <th>Recive Date</th>
+                  <!-- <th>TOTAL</th> -->
+                  <th>Alt. Number</th>
+                  <th>Discription</th>
+                  <th>UPDATE</th>
+                  <th>DELETE</th>
+              </tr>
+              <tbody id="tbody">
+                  
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <hr>
+
+  <h6 class="power">
+      <a href="https://pedrosmazloumian.github.io/-/" target="_blank">Powerd By:
+        <strong> <img src="logo-1.png" alt="" >Pedros Mazloumian</strong></a>
+  </h6>
+
+  </div>
+</div>
+ 
+
+<!-- ****************************************            LIST TO DO SCRIPT (JS)                     ********************************** -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const todoList = document.getElementById('todo-list');
+    const todoInput = document.getElementById('todo-input');
+    const addButton = document.getElementById('add-button');
+
+    addButton.addEventListener('click', addTask);
+
+    // Load tasks from local storage on page load
+    loadTasks();
+
+    function addTask() {
+      const taskText = todoInput.value.trim();
+      if (taskText === '') return;
+
+      // Create new task element
+      const taskElement = document.createElement('li');
+      taskElement.className = 'todo-item';
+      taskElement.innerHTML = `
+        <input type="checkbox">
+        <span>${taskText}</span>
+        <input type="text" value="${taskText}" style="display: none;">
+        <button class="edit-button">Edit</button>
+        <button class="delete-button">Delete</button>
+      `;
+
+      // Add event listeners to the elements
+      const checkbox = taskElement.querySelector('input[type="checkbox"]');
+      const taskSpan = taskElement.querySelector('span');
+      const editInput = taskElement.querySelector('input[type="text"]');
+      const editButton = taskElement.querySelector('.edit-button');
+      const deleteButton = taskElement.querySelector('.delete-button');
+
+      checkbox.addEventListener('change', toggleTask);
+      taskSpan.addEventListener('click', enableEdit);
+      editInput.addEventListener('blur', updateTask);
+      editButton.addEventListener('click', enableEdit);
+      deleteButton.addEventListener('click', deleteTask);
+
+      // Append the new task to the list
+      todoList.appendChild(taskElement);
+
+      // Clear the input field
+      todoInput.value = '';
+
+      // Save tasks to local storage
+      saveTasks();
+    }
+
+    function toggleTask(event) {
+      const checkbox = event.target;
+      const taskElement = checkbox.closest('.todo-item');
+      const taskSpan = taskElement.querySelector('span');
+      taskSpan.classList.toggle('completed', checkbox.checked);
+      saveTasks();
+    }
+
+    function enableEdit(event) {
+      const taskElement = event.target.closest('.todo-item');
+      const taskSpan = taskElement.querySelector('span');
+      const editInput = taskElement.querySelector('input[type="text"]');
+      const editButton = taskElement.querySelector('.edit-button');
+
+      taskSpan.style.display = 'none';
+      editInput.style.display = 'block';
+      editInput.focus();
+
+      // Set the cursor at the end of the text
+      const length = editInput.value.length;
+      editInput.setSelectionRange(length, length);
+
+      editButton.style.display = 'none';
+    }
+
+    function updateTask(event) {
+      const editInput = event.target;
+      const taskElement = editInput.closest('.todo-item');
+      const taskSpan = taskElement.querySelector('span');
+      const editButton = taskElement.querySelector('.edit-button');
+
+      taskSpan.textContent = editInput.value;
+      taskSpan.style.display = 'block';
+      editInput.style.display = 'none';
+      editButton.style.display = 'inline-block';
+
+      saveTasks();
+    }
+
+    function deleteTask(event) {
+      const deleteButton = event.target;
+      const taskElement = deleteButton.closest('.todo-item');
+      todoList.removeChild(taskElement);
+      saveTasks();
+    }
+
+    function loadTasks() {
+      const savedTasks = localStorage.getItem('tasks');
+      if (savedTasks) {
+        todoList.innerHTML = savedTasks;
+
+        // Restore event listeners after loading tasks
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          checkbox.addEventListener('change', toggleTask);
+        });
+
+        const taskSpans = document.querySelectorAll('.todo-item span');
+        taskSpans.forEach(span => {
+          span.addEventListener('click', enableEdit);
+        });
+
+        const editInputs = document.querySelectorAll('.todo-item input[type="text"]');
+        editInputs.forEach(input => {
+          input.addEventListener('blur', updateTask);
+        });
+
+        const editButtons = document.querySelectorAll('.edit-button');
+        editButtons.forEach(button => {
+          button.addEventListener('click', enableEdit);
+        });
+
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', deleteTask);
+        });
+      }
+    }
+
+    function saveTasks() {
+      localStorage.setItem('tasks', todoList.innerHTML);
+    }
+  });
+</script>
+<!-- ****************************************            ALT ADJUST SCRIPT (JS)                     ********************************** -->
+
+
+<script src="main.js"></script>  
+</body>
+</html>

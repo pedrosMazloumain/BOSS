@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+    background: #e1ecf2;
+    /* height: 100vh; */
+}
+.wrapper{
+  margin: 10px;
+}
+.wrapper .top_navbar{
+  width: calc(100% - 20px);
+  height: 60px;
+  display: flex;
+  position: fixed;
+  top: 10px;
+}
+
+.wrapper .top_navbar .hamburger{
+  width: 70px;
+  height: 100%;
+  background: #2e4ead;
+  padding: 15px 17px;
+  border-top-left-radius: 20px;
+  cursor: pointer;
+}
+
+.wrapper .top_navbar .hamburger div{
+  width: 35px;
+  height: 4px;
+  background: #92a6e2;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.wrapper .top_navbar .top_menu{
+  width: calc(100% - 70px);
+  height: 100%;
+  background: #fff;
+  border-top-right-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.wrapper .top_navbar .top_menu .logo{
+  color: #000000;
+  font-size: 40px;
+  font-weight: 1000;
+  letter-spacing: 2px;
+}
+
+.wrapper .top_navbar .top_menu ul{
+  display: flex;
+}
+
+.wrapper .top_navbar .top_menu ul li a{
+  display: block;
+  margin: 0 10px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  border: 1px solid #2e4ead;
+  border-radius: 50%;
+  color: #2e4ead;
+}
+
+.wrapper .top_navbar .top_menu ul li a:hover{
+  background: #4360b5;
+  color: #fff;
+}
+
+.wrapper .top_navbar .top_menu ul li a:hover i{
+  color: #fff;
+}
+
+.wrapper .sidebar{
+  position: fixed;
+  top: 70px;
+  left: 10px;
+  background: #2e4ead;
+  width: 200px;
+  height: calc(100% - 80px);
+  border-bottom-left-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.wrapper .sidebar ul li a{
+    display: block;
+    padding: 20px;
+    color: #fff;
+    position: relative;
+    margin-bottom: 1px;
+    color: #92a6e2;
+    white-space: nowrap;
+}
+
+.wrapper .sidebar ul li a:before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #92a6e2;
+  display: none;
+}
+
+.wrapper .sidebar ul li a span.icon{
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.wrapper .sidebar ul li a span.title{
+  display: inline-block;
+}
+
+.wrapper .sidebar ul li a:hover,
+.wrapper .sidebar ul li a.active{
+  background: #4360b5;
+  color: #fff;
+}
+
+.wrapper .sidebar ul li a:hover:before,
+.wrapper .sidebar ul li a.active:before{
+  display: block;
+}
+
+.wrapper .main_container{
+  width: (100% - 200px);
+  margin-top: 70px;
+  margin-left: 200px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.wrapper .main_container .item{
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 15px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.wrapper.collapse .sidebar{
+  width: 70px;
+}
+
+.wrapper.collapse .sidebar ul li a{
+  text-align: center; 
+}
+
+.wrapper.collapse .sidebar ul li a span.icon{
+  margin: 0;
+}
+
+.wrapper.collapse .sidebar ul li a span.title{
+  display: none;
+}
+
+.wrapper.collapse .main_container{
+  width: (100% - 70px);
+  margin-left: 70px;
+}
+
+/**********************************************************************************************************************/
+#todo-container {
+  position: relative;
+  left: 40%;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#todo-header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.todo-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.todo-item span {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.todo-item input[type="text"] {
+  /* flex-grow: 1; */
+  border: none;
+  outline: none;
+  padding: 5px;
+  background-color: #d5d5d5;
+}
+
+#todo-input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: white;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+#add-button {
+  width: calc(100% - 0px);
+  padding: 10px;
+  border: none;
+  outline: none;
+  background-color: #2ecc71;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#add-button:hover {
+  background: #19f006;
+    color: black;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+.edit-button{
+  background-color: rgb(52, 152, 219);
+  border: 1px solid #363434;
+  border-radius: 4px;
+  margin-right: 7px;
+}
+
+.delete-button{
+  border: 1px solid #363434;
+  border-radius: 4px;
+  background-color: #eb4848;
+}
+
+
+
+/* **********************************************                 CRUDS               ************************************************ */
+
+.crud{
+  width: 80%;
+  margin: auto;
+}
+
+.head{
+  text-align: center;
+  margin: 10px 0;
+}
+
+input{
+  width: 100%;
+  height: 30px;
+  outline: none;
+  border: none;
+  /* background-color: rgb(76, 47, 78); */
+  background-color: #d5d5d5;
+  border: 2px solid #8f8a8a;
+  margin: 4px 3px;
+  border-radius: 6px;
+  padding: 4px;
+  color: #9d9d9d;
+}
+
+input:focus{
+  background: rgb(53, 50, 50);
+  transform: scale(1.1);
+}
+
+.price{
+  width: 90% ;
+  display: flex;
+  padding: 0 50px;
+}
+
+#total{
+  background: #d11818;
+  padding: 5px 7px;
+  border-radius: 4px;
+  margin: 10px 10px;
+  cursor: pointer;
+  width: 50px;
+}
+
+#total::before{
+  content: 'Total ';
+}
+
+
+button{
+  width: 100%;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  background: #2ecc71;
+  color: white;
+  border-radius: 20px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+button:hover{
+  background: #19f006;
+  color: black;
+  letter-spacing: 2px;
+  transition: 0.5s;
+}
+
+.btn_search{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn_search button{
+  width: 45%;
+}
+
+table{
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+td,th{
+  padding: 5px;
+}
+
+
+
+
+/**************************          CSS BUTTON          *************************************/
+
+
+
+.power {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.power a{
+  padding: 10px 0px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-size: small;
+}
+
+.power a strong{
+    padding: 2.5px;
+    color: rgb(151 153 159);
+    text-shadow: 0px 1px 20px rgb(227 17 17);
+    border-bottom: double;
+    border-left: double;
+}
+
+.power a strong img{
+  width: 35px;
+  margin-bottom: -12px;
+}
+
+.power a strong:hover{
+  transition: 0.5s ease-in-out;
+  letter-spacing: 2px;
+  /* box-shadow: 0px 2px 13px 0px rgb(17, 56, 231)  ; */
+
+}
