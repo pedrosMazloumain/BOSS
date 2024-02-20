@@ -26,7 +26,7 @@ body{
 .wrapper .top_navbar .hamburger{
   width: 70px;
   height: 100%;
-  background: #2e4ead;
+  background: #ffffff;
   padding: 15px 17px;
   border-top-left-radius: 20px;
   cursor: pointer;
@@ -35,7 +35,7 @@ body{
 .wrapper .top_navbar .hamburger div{
   width: 35px;
   height: 4px;
-  background: #92a6e2;
+  background: #2e4ead;
   margin: 5px 0;
   border-radius: 5px;
 }
@@ -93,6 +93,8 @@ body{
   height: calc(100% - 80px);
   border-bottom-left-radius: 20px;
   transition: all 0.3s ease;
+  box-shadow: 5px 5px 17px 3px #3c3b3b87;
+
 }
 
 .wrapper .sidebar ul li a{
@@ -377,12 +379,14 @@ td,th{
 }
 
 .power a strong{
-    padding: 2.5px;
-    color: rgb(151 153 159);
-    text-shadow: 0px 1px 20px rgb(227 17 17);
-    border-bottom: double;
-    border-left: double;
+  padding: 2.5px;
+  color: rgb(163 4 4);
+  text-shadow: 0px 1px 8px rgb(255 0 0);
+  border-bottom: double;
+  border-right: double;
+  box-shadow: 3px 3px 5px 0px #ff00006b;
 }
+
 
 .power a strong img{
   width: 35px;
